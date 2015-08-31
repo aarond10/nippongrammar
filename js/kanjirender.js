@@ -186,7 +186,11 @@ function renderMojiOrSpan(canvasElem, moji, millisecondsPerStroke)
 
 function animateWriting(txt, div_id, millisecondsPerStroke)
 {
-	document.getElementById(div_id).innerHTML = "";
+    if (typeof div_id === 'String'){
+        document.getElementById(div_id).innerHTML = "";
+    }else{
+        div_id.innerHTML = "";
+    }
 	var renderQueue = [];
 
 	function renderNext() {
@@ -202,7 +206,11 @@ function animateWriting(txt, div_id, millisecondsPerStroke)
 		canvas.style.width = "1em";
 		canvas.style.height = "1em";
 	
-		document.getElementById(div_id).appendChild(canvas);
+        if (typeof div_id === 'String'){
+            document.getElementById(div_id).appendChild(canvas);
+        }else{
+            div_id.appendChild(canvas);;
+        }
 
 		renderQueue.push(renderMojiOrSpan(canvas, ch, millisecondsPerStroke));
 	}
